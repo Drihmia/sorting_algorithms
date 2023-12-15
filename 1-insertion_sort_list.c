@@ -9,7 +9,7 @@
 void insertion_sort_list(listint_t **list)
 {
 	listint_t *tmp = NULL, *pv = NULL, *h = NULL, *nt = NULL;
-	int i = 0;
+
 	if (!(list) || !(*list) || !((*list)->next))
 		return;
 	tmp = *list, h = (*list);
@@ -18,7 +18,6 @@ void insertion_sort_list(listint_t **list)
 		tmp = h;
 		while (tmp)
 		{
-			i++;
 			if (tmp->prev && tmp->prev->n < tmp->n)
 				break;
 			if (tmp->prev && tmp->prev->n > tmp->n)
@@ -36,8 +35,8 @@ void insertion_sort_list(listint_t **list)
 					(*list) = tmp;
 				else
 					pv->prev->next = tmp;
-
 				pv->prev = tmp;
+
 				print_list(*list);
 			}
 			else
@@ -45,5 +44,4 @@ void insertion_sort_list(listint_t **list)
 		}
 		h = h->next;
 	}
-	printf("Number of total loops : %d\n", i);
 }
