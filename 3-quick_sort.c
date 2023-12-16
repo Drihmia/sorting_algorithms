@@ -1,6 +1,5 @@
 #include "sort.h"
 void quicksort(int *arr, int low_index, int high_index, size_t size);
-void swap(int *i, int *j);
 int partition(int *arr, int low_index, int high_index, size_t size);
 
 /**
@@ -20,14 +19,15 @@ void quick_sort(int *array, size_t size)
 /**
   * quicksort - a recursive quick sorting funtion.
   * @arr: array to be sorted.
-  * @l: the lowest index (leftmost).
-  * @r: the higher index (rightmost).
+  * @low_index: the lowest index (leftmost).
+  * @high_index: the higher index (rightmost).
   * @size: the size of the array for print_array funtion.
   * Return: None.
   */
 void quicksort(int *arr, int low_index, int high_index, size_t size)
 {
 	int i;
+
 	if (low_index >= high_index || size < 2)
 		return;
 
@@ -39,8 +39,8 @@ void quicksort(int *arr, int low_index, int high_index, size_t size)
 /**
   * partition - a funtion that partition the array given.
   * @arr: array to be partitioned.
-  * @l: the lowest index (leftmost).
-  * @r: the higher index (rightmost).
+  * @low_index: the lowest index (leftmost).
+  * @high_index: the higher index (rightmost).
   * @size: the size of the array for print_array funtion.
   * Return: the new pivot positin.
   */
@@ -48,13 +48,13 @@ void quicksort(int *arr, int low_index, int high_index, size_t size)
 int partition(int *arr, int low_index, int high_index, size_t size)
 {
 	int pivot = arr[high_index];
-	int i = low_index, j;
+	int j, i = low_index;
 
 	for (j = low_index; j < high_index; ++j)
 	{
 		if (arr[j] < pivot)
 		{
-			if ( arr[j]!= arr[i])
+			if (arr[j] != arr[i])
 			{
 				swap(&arr[i], &arr[j]);
 				print_array(arr, size);
