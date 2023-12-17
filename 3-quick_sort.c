@@ -2,6 +2,7 @@
 void quicksort(int *arr, int low_index, int high_index, size_t size);
 int partition(int *arr, int low_index, int high_index, size_t size);
 
+
 /**
  * quick_sort - a function that sorts an array of integers in ascending order
  * using the Quick sort algorithm.

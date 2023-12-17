@@ -1,15 +1,14 @@
 #include "sort.h"
 
 /**
-  * shell_sort - a function that sorts an array of integers in ascending order
-  * using the Shell sort algorithm, using the Knuth sequence.
-  * @array: array of integers to be sorted.
-  * @size: the size of the array.
-  * Return: None.
-  */
+ * shell_sort - Sorts an array of integers in ascending order
+ *              using the Shell sort algorithm with Knuth sequence.
+ * @array: Array of integers to be sorted.
+ * @size: Size of the array.
+ */
 void shell_sort(int *array, size_t size)
 {
-	size_t gap = 0, i;
+	size_t gap = 0, i, j;
 
 	if (!array || size < 2)
 		return;
@@ -18,6 +17,7 @@ void shell_sort(int *array, size_t size)
 	{
 		gap = gap * 3 + 1;
 	}
+
 	while (gap > 0)
 	{
 		for (i = 0; i < (size - gap); i++)
@@ -25,13 +25,17 @@ void shell_sort(int *array, size_t size)
 			if (array[i] > array[i + gap])
 			{
 				swap(&array[i], &array[i + gap]);
-			}
-		}
-		for (; i >= gap; i--)
-		{
-			if (array[i - gap] > array[i])
-			{
-				swap(&array[i], &array[i - gap]);
+				j = i;
+				while (j >= gap && j - gap >= 0)
+				{
+					if (array[j - gap] > array[j])
+					{
+						swap(&array[j], &array[j - gap]);
+						j = j - 1;
+					}
+					else
+						break;
+				}
 			}
 		}
 		gap /= 3;
@@ -39,13 +43,11 @@ void shell_sort(int *array, size_t size)
 	}
 }
 
-
 /**
- * swap - a function the spaw two integer's postion in an array.
- * @i: address of integer i.
- * @j: address of integer j.
-  * Return: None.
-  */
+ * swap - Swaps two integers in an array.
+ * @i: Address of integer i.
+ * @j: Address of integer j.
+ */
 void swap(int *i, int *j)
 {
 	int tmp = *i;
@@ -53,3 +55,4 @@ void swap(int *i, int *j)
 	*i = *j;
 	*j = tmp;
 }
+
