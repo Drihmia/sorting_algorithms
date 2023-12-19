@@ -47,9 +47,17 @@ void merge_sort(int *array, size_t size)
 	if (size > 1)
 	{
 		size_t mid = size / 2, i, j = 0;
-		int *left = malloc(mid * 4);
-		int *right = malloc(mid * 4);
+		int *left, *right;
 
+		left = malloc(mid * (sizeof(int)));
+		if (!left)
+			return;
+		right = malloc(mid * (sizeof(int)));
+		if (!right)
+		{
+			free(left);
+			return;
+		}
 		for (i = 0; i < size; i++)
 		{
 			if (i < mid)
