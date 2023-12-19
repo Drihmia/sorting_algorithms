@@ -11,9 +11,6 @@ void counting_sort(int *array, size_t size)
 {
 	int *count_array = NULL, *tmp_array = NULL, m_val = 0, i = 1;
 
-	if (array == NULL || size < 2)
-		return;
-
 	m_val = array[0];
 	while (i < (signed int)size) /* searching the max value : m_val */
 	{
@@ -44,7 +41,10 @@ void counting_sort(int *array, size_t size)
 	if (!tmp_array)
 		return;
 	while (i >= 0) /* placing each number at right position */
-		tmp_array[count_array[array[i]] - 1] = array[i], i--;
+	{
+		tmp_array[count_array[array[i]] - 1] = array[i];
+		count_array[array[i]]--, i--;
+	}
 	i = 0;
 	while (i < (signed int)size) /* copie the tmp array into array given */
 		array[i] = tmp_array[i], i++;
