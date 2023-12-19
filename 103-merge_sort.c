@@ -33,7 +33,7 @@ void merge(int *array, size_t l_idx, size_t mid,
 		array[k++] = arr[i++];
 
 	while (j <= h_idx)
-		array[k++] = arr[j++], printf("%d\n", array[k - 1]);
+		array[k++] = arr[j++];
 
 
 	printf("[Done]: "), print_array(array + l_idx, k - l_idx);
