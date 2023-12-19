@@ -10,6 +10,7 @@ void heap_sort(int *array, size_t size)
 {
 	int i;
 
+
 	for (i = size / 2 - 1; i >= 0; i--)
 	{
 		sift_down(array, i, size - 1, size);
@@ -17,11 +18,8 @@ void heap_sort(int *array, size_t size)
 
 	for (i = size - 1; i > 0; i--)
 	{
-		if (array[0] != array[i])
-		{
-			swap_heap(&array[0], &array[i], size, array);
-			sift_down(array, 0, i - 1, size);
-		}
+		swap_heap(&array[0], &array[i], size, array);
+		sift_down(array, 0, i - 1, size);
 
 	}
 }
@@ -50,8 +48,7 @@ void sift_down(int arr[], size_t start, size_t end, size_t size)
 
 		if (root != swap_index)
 		{
-			if (arr[root] != arr[swap_index])
-				swap_heap(&arr[root], &arr[swap_index], size, arr);
+			swap_heap(&arr[root], &arr[swap_index], size, arr);
 			root = swap_index;
 		}
 		else
@@ -76,6 +73,5 @@ void swap_heap(int *a, int *b, size_t size, int *array)
 	*a = *b;
 	*b = temp;
 
-	if (*a != *b)
-		print_array(array, size);
+	print_array(array, size);
 }
