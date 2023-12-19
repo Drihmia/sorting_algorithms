@@ -41,7 +41,10 @@ void swap(int *i, int *j);
 
 void swap_DLL(listint_t **list, listint_t **right_node);
 
-void merge(int *array, int *left, size_t l_size, int *right, size_t r_size);
+void merge(int *array, size_t l_idx, size_t mid,
+		size_t h_idx, size_t size, int *arr);
+void merge_split(int *array, size_t l_idx,
+		size_t h_idx, size_t size, int *arr);
 
 void swap_heap(int *a, int *b, size_t size, int *array);
 void sift_down(int arr[], size_t start, size_t end, size_t size);

@@ -4,62 +4,90 @@
  * merge - merges two subarrays into a single sorted array
  * and prints the steps.
  * @array: original array containing the merged result.
- * @left: pointer to the left subarray.
- * @l_size: size of the left subarray.
- * @right: pointer to the right subarray.
- * @r_size: size of the right subarray.
+ * @arr: pointer to the malloc'd array.
+ * @l_idx: size of the left subarray.
+ * @h_idx: size of the left subarray.
+ * @mid: size of the left subarray.
+ * @size: size of the right subarray.
  */
-void merge(int *array, int *left, size_t l_size, int *right, size_t r_size)
+void merge(int *array, size_t l_idx, size_t mid,
+		size_t h_idx, size_t size, int *arr)
 {
-	size_t i = 0, j = 0, k = 0;
+	size_t i = l_idx, j = mid + 1, k = l_idx;
 
-	printf("Merging...\n[left]: "), print_array(left, l_size);
+	(void) size;
+	printf("Merging...\n[left]: ");
+	print_array(arr + l_idx, mid - l_idx + 1);
 
-	printf("[right]: "), print_array(right, r_size);
+	printf("[right]: "), print_array(arr + mid + 1, h_idx - mid);
 
-	while (i < l_size && j < r_size)
+	while (i <= mid && j <= h_idx)
 	{
-		if (left[i] <= right[j])
-			array[k++] = left[i++];
+		if (arr[i] <= arr[j])
+			array[k++] = arr[i++];
 		else
-			array[k++] = right[j++];
+			array[k++] = arr[j++];
 	}
 
-	while (i < l_size)
-		array[k++] = left[i++];
+	while (i <= mid)
+		array[k++] = arr[i++];
 
-	while (j < r_size)
-		array[k++] = right[j++];
+	while (j <= h_idx)
+		array[k++] = arr[j++], printf("%d\n", array[k - 1]);
 
-	printf("[Done]: "), print_array(array, k);
+
+	printf("[Done]: "), print_array(array + l_idx, k - l_idx);
 }
 
 /**
+ * merge_split - sorts an array using the merge sort algorithm
+ * and prints the steps.
+ * @array: original array containing the merged result.
+ * @arr: pointer to the malloc'd array.
+ * @l_idx: size of the left subarray.
+ * @h_idx: size of the left subarray.
+ * @size: size of the right subarray.
+ */
+void merge_split(int *array, size_t l_idx, size_t h_idx, size_t size, int *arr)
+{
+	size_t mid, i;
+
+	if ((h_idx - l_idx) > 0)
+	{
+		mid = (h_idx + l_idx + 1) / 2;
+
+		merge_split(array, l_idx, mid - 1, size, arr);
+		merge_split(array, mid, h_idx, size, arr);
+
+		merge(array, l_idx, mid - 1, h_idx, size, arr);
+		for (i = l_idx; i <= h_idx; i++)
+			arr[i] = array[i];
+	}
+}
+/**
  * merge_sort - sorts an array using the merge sort algorithm
  * and prints the steps.
- * @array: array to be sorted.
- * @size: size of the array.
+ * @array: original array containing the merged result.
+ * @size: size of the right subarray.
  */
 void merge_sort(int *array, size_t size)
 {
-	if (size > 1)
-	{
-		size_t mid = size / 2, i, j = 0;
-		int *left = malloc(mid * 4);
-		int *right = malloc(mid * 4);
+	int *arr;
+	size_t i;
 
-		for (i = 0; i < size; i++)
-		{
-			if (i < mid)
-				left[i] = array[i];
-			else
-				right[j] = array[i], j++;
-		}
+	if (!array || size < 2)
+		return;
 
+	arr = malloc(sizeof(int) * size);
+	if (!arr)
+		return;
 
-		merge_sort(left, mid);
-		merge_sort(right, size - mid);
+	for (i = 0; i < size; i++)
+		arr[i] = array[i];
 
-		merge(array, left, mid, right, size - mid);
-	}
+	/* i m passing an index's value and not actual size */
+	merge_split(array, 0, size - 1, size, arr);
+	for (i = 0; i < size; i++)
+		array[i] = arr[i];
+	free(arr);
 }
