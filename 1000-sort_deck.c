@@ -7,8 +7,6 @@
   */
 void sort_deck(deck_node_t **deck)
 {
-	deck_node_t *tmp = NULL, *h = NULL;
-
 	if (!(deck) || !(*deck) || !((*deck)->next))
 		return;
 }
