@@ -8,12 +8,13 @@
   */
 void cocktail_sort_list(listint_t **list)
 {
-	listint_t *tmp = *list;
-	int swaped = 0;
+	listint_t *tmp;
+	int swaped = 1;
 
 	if (!(list) || !(*list) || !((*list)->next))
 		return;
-	while (1)
+	tmp = *list;
+	while (swaped)
 	{
 		swaped = 0;
 		while (tmp)
@@ -45,8 +46,6 @@ void cocktail_sort_list(listint_t **list)
 					break;
 				tmp = tmp->prev; }
 		}
-		if (!swaped)
-			break;
 	}
 }
 /**
