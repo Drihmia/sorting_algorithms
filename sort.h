@@ -49,46 +49,7 @@ void merge_split(int *array, size_t l_idx,
 void swap_heap(int *a, int *b, size_t size, int *array);
 void sift_down(int arr[], size_t start, size_t end, size_t size);
 
-/**
- * enum kind_e - Represents the suit of a playing card
- *
- * @SPADE: Spade suit
- * @HEART: Heart suit
- * @CLUB: Club suit
- * @DIAMOND: Diamond suit
- */
-typedef enum kind_e
-{
-	SPADE = 0,
-	HEART,
-	CLUB,
-	DIAMOND
-} kind_t;
-/**
- * struct card_s - Playing card
- *
- * @value: Value of the card
- * From "Ace" to "King"
- * @kind: Kind of the card
- */
-typedef struct card_s
-{
-	const char *value;
-	const kind_t kind;
-} card_t;
-
-/**
- * struct deck_node_s - Deck of card
- *
- * @card: Pointer to the card of the node
- * @prev: Pointer to the previous node of the list
- * @next: Pointer to the next node of the list
- */
-typedef struct deck_node_s
-{
-	const card_t *card;
-	struct deck_node_s *prev;
-	struct deck_node_s *next;
-} deck_node_t;
-void sort_deck(deck_node_t **deck);
+int get_m_val(int *array, size_t size);
+unsigned int digit_at_pos(unsigned int n, unsigned int exp, int radix);
+int _len(long int n);
 #endif
