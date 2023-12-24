@@ -43,6 +43,7 @@ void h_sort_radix(int *array, int exp, int radix, int *output, size_t size)
 			ar_idx[pos] += 1;
 		}
 	}
+	free(ar_idx), free(ar_cnt);
 }
 /**
   * radix_sort - a function that sorts an array of integers in ascending
@@ -69,6 +70,7 @@ void radix_sort(int *array, size_t size)
 		print_array(array, size);
 		exp = exp * 10;
 	}
+	free(output);
 }
 
 /**
